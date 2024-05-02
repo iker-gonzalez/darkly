@@ -12,7 +12,8 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "base"
+  # ! Use the latest stable version of debian for the box
+  config.vm.box = "koalephant/debian12"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -54,16 +55,23 @@ Vagrant.configure("2") do |config|
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
-  #
+  # ! Provision VMware with 1 CPU and 512MB of memory
+  config.vm.provider "vmware_fusion" do |v|
+    # * Set the name of the VM
+      config.vm.hostname = "websleuth"
+    # * Display the VMWare GUI when booting the machine
+      v.vmx["gui"] = "true"
+    # * Customize the amount of CPUs on the VM:
+      v.vmx["numvcpus"] = "1"
+    # * Customize the amount of memory on the VM:
+      v.vmx["memsize"] = "512"
+    # * Enable the IDE 0:0 device
+      v.vmx["ide0:0.present"] = "TRUE"
+    # * Set the path of your ISO file
+      v.vmx["ide0:0.filename"] = "Darkly_i386.iso"
+    # * Specify that the device is a CD-ROM image
+      v.vmx["ide0:0.devicetype"] = "cdrom-image"
+        end
   # View the documentation for the provider you are using for more
   # information on available options.
 
