@@ -1,5 +1,8 @@
 # Hidden Fields in Submit Forms Vulnerability
 
+## Vulnerability Path
+**http://<ip_address>/?page=recover**
+
 ## Overview
 
 Hidden fields in submit forms vulnerability occurs when sensitive information is included in the HTML code of a form but is not visible to the user. Attackers can exploit this vulnerability to manipulate or submit unauthorized data to the server.

@@ -1,5 +1,8 @@
 # Brute Force Attack
 
+## Vulnerability Path
+**http://<ip_address>/?page=signin**
+
 ## Overview
 
 A brute force attack is a cybersecurity technique used to gain unauthorized access to a system by trying every possible combination of usernames and passwords until the correct one is found. This method relies on the sheer force of computing power to systematically check all possible combinations.
