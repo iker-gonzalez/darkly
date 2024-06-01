@@ -1,0 +1,1 @@
+hay una cookie que es un md5 que de decripta y su valor es false, si encriptas true con el mismo algoritmo y recargas te sale un alert con la flag
