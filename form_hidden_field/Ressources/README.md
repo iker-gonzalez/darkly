@@ -12,6 +12,8 @@ Hidden fields in submit forms are typically discovered during web application se
 ### How I Discovered It
 I discovered this vulnerability by inspecting the HTML code of the page `http://<host_ip_address>/?page=recover#`. Upon examination, I found the email `webmaster@borntosec.com` as a hidden value of the post form submission to recover the password. I was able to change this email to my own email in the HTML, potentially allowing me to receive password recovery emails intended for other users.
 
+![hidden_form_field_email](https://github.com/iker-gonzalez/darkly/blob/main/form_hidden_field/Ressources/hidden_form_field.png)
+
 ## Prevention
 
 To prevent hidden fields in submit forms vulnerability, follow these best practices:
