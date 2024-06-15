@@ -2,6 +2,9 @@
 
 This document outlines the impact and prevention of a security breach involving file upload bypass vulnerabilities. Such vulnerabilities allow attackers to upload malicious files to a system, potentially leading to unauthorized access or control.
 
+## Vulnerability Path
+**http://<ip_address>/index.php?page=upload**
+
 ## Discovery
 
 ### How It's Usually Found
