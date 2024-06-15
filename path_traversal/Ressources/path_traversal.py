@@ -15,7 +15,8 @@ def path_traversal(base_url):
             if response.status_code == 200:
                 soup = BeautifulSoup(response.content, 'html.parser')
                 if 'flag' in str(soup):
-                    print('\033[32mFOUND\033[0m')
+                    flag = str(soup).split('flag')[1].split('<')[0]
+                    print(f'FOUND, flag\033[32m{flag}\033[0m')
                     break
         except requests.RequestException as e:
             print(f"Request failed: {e}")
