@@ -5,16 +5,18 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
 def print_file_content(file_url):
-	try:
-		# Send a GET request to the file URL
-		response = requests.get(file_url)
-		# Raise an error for bad responses
-		response.raise_for_status()
-		# Print the content of the file
-		print(response.text)
-
-	except Exception as e:
-		print(f"An error occurred: {e}")
+    try:
+        # Send a GET request to the file URL
+        response = requests.get(file_url)
+        # Raise an error for bad responses
+        response.raise_for_status()
+        # Check if the content contains the string "flag"
+        if "flag" in response.text:
+            # Print the content of the file
+            print("\033[92m" + response.text + "\033[0m")
+            sys.exit(0)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def scrape_website(root_addr, directory):
 	"""
