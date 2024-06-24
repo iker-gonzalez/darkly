@@ -1,1 +1,0 @@
-survey select has no data validation, inspect element and change the value for any option except "1" and put a number greater than 10

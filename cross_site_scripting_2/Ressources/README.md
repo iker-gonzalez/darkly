@@ -1,12 +1,14 @@
-# Cross Site Scripting (XSS)
+# Cross Site Scripting (XSS) 2
 
-# Overview
-Cross-Site Scripting (XSS) is a common web vulnerability where attackers inject malicious scripts into web pages viewed by other users. This occurs when web applications fail to properly validate or sanitize user input, allowing attackers to insert scripts that are executed in the context of other users' browsers. 
+## Overview
+
+Cross-Site Scripting (XSS) is a common web vulnerability where attackers inject malicious scripts into web pages viewed by other users. This occurs when web applications fail to properly validate or sanitize user input, allowing attackers to insert scripts that are executed in the context of other users' browsers.
 
 XSS attacks can have various consequences, including stealing session cookies, redirecting users to malicious websites, or modifying the content of the page.
 
 ## Vulnerability Path
-**http://<ip_address>/index.php?page=media&src=nsa
+
+**http://<ip_address>/index.php?page=media&src=nsa**
 
 ## Discovery
 
@@ -24,9 +26,9 @@ XSS attacks can have various consequences, including stealing session cookies, r
 
 In summary, attackers employ a combination of automated tools, manual techniques, and reconnaissance to uncover XSS vulnerabilities in web applications.
 
-
 ### How I Discovered It
-en la main ir a la foto de la nsa y en la url cambiar el src por uno que creas. hay que cambiar nsa por data:text/html;base64, + un script encodeado en base 64 ej:<script>alert("hi!");</script>
+
+In the main page, go to the NSA photo and change the `src` parameter in the URL to one you create. You need to replace `nsa` with `data:text/html;base64,` followed by a script encoded in base64, for example: `<script>alert("hi!");</script>`
 
 ## Additional Resources
 
@@ -37,5 +39,3 @@ en la main ir a la foto de la nsa y en la url cambiar el src por uno que creas. 
 - [Mozilla Web Security Guidelines](https://infosec.mozilla.org/guidelines/web_security): Mozilla's guidelines on web security, covering various topics including XSS prevention and mitigation strategies.
 
 - [Google Web Fundamentals - Security Overview](https://developers.google.com/web/fundamentals/security): Google's overview of web security fundamentals, offering insights into XSS prevention and other security measures for web applications.
-
-
