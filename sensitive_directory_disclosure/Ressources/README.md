@@ -34,7 +34,6 @@ During our investigation, we saw in the `robots.txt` that the directory `/.hidde
 
 - [OWASP: Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal)
 - [OWASP: Forced Browsing](https://owasp.org/www-community/attacks/Forced_browsing)
-- [OWASP: Information Disclosure](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/05-Review_Webpage_Content_for_Information_Leakage)
 - [OWASP: Testing for Directory Traversal/File Include](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/01-Testing_Directory_Traversal_File_Include)
 - [CWE-538: Insertion of Sensitive Information into Externally-Accessible File or Directory](https://cwe.mitre.org/data/definitions/538.html)
 - [NIST: Hidden File and Directory Discovery](https://nvd.nist.gov/vuln/detail/CVE-2020-35489)
