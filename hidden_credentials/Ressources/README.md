@@ -68,7 +68,6 @@ To prevent such breaches, consider the following measures:
 For further information about protecting against similar vulnerabilities, consider these resources:
 
 - [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
-- [Nginx Security Hardening Guide](https://www.nginx.com/blog/10-tips-for-10x-application-performance-and-security/)
 - [Understanding and Preventing Directory Traversal Attacks](https://owasp.org/www-community/attacks/Path_Traversal)
 - [Properly Using .htpasswd with Apache](https://httpd.apache.org/docs/2.4/howto/auth.html)
 - [Best Practices for Secure Password Storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
