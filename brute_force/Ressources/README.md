@@ -36,8 +36,8 @@ http://127.0.0.1:8080/?page=signin&username={}&password={}&Login=Login#
 3. After various attempts, the script successfully found the correct credentials:
 
 ```
-- **Username:** admin
-- **Password:** shadow
+- Username: admin
+- Password: shadow
 ```
 
 4. Using these credentials, I was able to log in to the admin panel and gain unauthorized access to sensitive information.
