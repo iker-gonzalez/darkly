@@ -49,4 +49,3 @@ To prevent file upload vulnerabilities, consider the following measures:
 For more information on mitigating file upload vulnerabilities, the following resources may be helpful:
 
 - [OWASP Unrestricted File Upload](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
-- [Secure File Upload in Web Applications](https://www.acunetix.com/blog/articles/complete-guide-file-upload-vulnerabilities/)
