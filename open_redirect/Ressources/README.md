@@ -46,7 +46,7 @@ To prevent such security breaches, it's crucial to take the following measures:
 
 For further information on addressing this vulnerability and enhancing overall web application security, consider the following resources:
 
-* [OWASP Open Redirects](https://owasp.org/www-community/attacks/Open_redirect)
+* [OWASP Open Redirects](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html)
 * [OWASP Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
 * [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
 * [NIST Guidelines for Secure Web Development](https://csrc.nist.gov/publications/detail/sp/800-44/version-2/final)
