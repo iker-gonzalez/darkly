@@ -53,7 +53,5 @@ To prevent path traversal vulnerabilities, consider the following measures:
 
 For more information on path traversal vulnerabilities and how to prevent them, refer to the following resources:
 
-- [PortSwigger - File Path Traversal](https://portswigger.net/web-security/learning-paths/server-side-vulnerabilities-apprentice/path-traversal-apprentice/file-path-traversal/reading-arbitrary-files-via-path-traversal)
 - [OWASP - Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal)
 - [OWASP Cheat Sheet Series - File Upload](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html) (Provides insights on secure file upload, which is closely related to preventing path traversal attacks)
-- [OWASP Testing Guide v4 - File System](https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/06-Testing_for_Path_Traversal) (Offers a comprehensive guide on testing for path traversal vulnerabilities)
