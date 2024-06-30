@@ -38,7 +38,7 @@ I found this vulnerability when inputing feedback through the web form existing 
 
 - **Error Identification**: Submitting the form resulted in a console error message indicating the absence of `checkForm()` in the source code, hence meaning that the only input validation made is the one from validate_form(), that only checks if fields name and message are empty or not. Moreover, there is a typo error in `validate_form()`: in the form, the textarea name is given as **mtxtMessage**, but in the `validate_form()` function, it's referred to as **mtxMessage**. Because of this discrepancy, the `validate_required()` function can't find the "mtxMessage" field, so it doesn't perform the validation check on the message field. As a result, the form can be submitted even if the message field is empty.
 
-- **XSS Exploration**: Subsequently, the form was tested for Cross-Site Scripting (XSS) vulnerability by injecting a simple script into the message field, which successfully exploited the vulnerability. Additionally, it was discovered that entering "script" in either the Name or Message input fields also led to the retrieval of sensitive data.
+- **XSS Exploration**: The form was subsequently tested for Cross-Site Scripting (XSS) vulnerabilities by injecting the word "script" into either the Name or Message input fields. This led to the retrieval of sensitive data and the display of the corresponding flag. It's important to note that this is purely an educational example: "script" is treated as a string and doesn't pose any real vulnerability. The key takeaway is that without proper input validation in forms, harmful scripts could potentially be injected, leading to serious security risks.
 
 ## Prevention
 
