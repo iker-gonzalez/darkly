@@ -29,28 +29,46 @@ In summary, attackers employ a combination of automated tools, manual techniques
 I found this vulnerability when inputing feedback through the web form existing in the vulnerability path. The following steps outline the discovery process:
 
 - **Assumption Error**: Initially, it was assumed that submission required both the Name field and message fields to be filled (given the * mark next to both of them).
+
 - **Form Submission**: Upon submitting the form with only the Name field filled, no error message was triggered despite of having the message section empty.
+
 - **Source Code Inspection**: Upon inspecting the form's source code, two significant observations were made:
   1. The form invokes the `validate_form()` JavaScript function upon submission, ensuring that fields are not empty (`<form method="post" name="guestform" onsubmit="return validate_form(this)">`).
   2. The form button triggers the `checkForm()` function upon click (`<td><input name="btnSign" type="Submit" value="Sign Guestbook" onClick="return checkForm();"></td>`).
-- **Behavior Observation**: It was noted that the `onClick` event is triggered before the submission event of the form.
-- **Error Identification**: Submitting the form resulted in a console error message indicating the absence of `checkForm()`.
-- **Potential Solution**: It was considered to implement the missing `checkForm()` function to alter the form behavior.
-- **Failed Attempt**: An attempt was made to implement `checkForm()` to change the `onsubmit` attribute of the form's name element. However, this approach proved ineffective.
-- **XSS Exploration**: Subsequently, the form was tested for Cross-Site Scripting (XSS) vulnerability by injecting a simple script into the message field, which successfully exploited the vulnerability.
-- **Alternative Exploitation**: Additionally, it was discovered that entering "script" in either the Name or Message input fields also led to the retrieval of sensitive data.
+
+- **Error Identification**: Submitting the form resulted in a console error message indicating the absence of `checkForm()` in the source code, hence meaning that the only input validation made is the one from validate_form(), that only checks if fields name and message are empty or not. Moreover, there is a typo error in `validate_form()`: in the form, the textarea name is given as **mtxtMessage**, but in the `validate_form()` function, it's referred to as **mtxMessage**. Because of this discrepancy, the `validate_required()` function can't find the "mtxMessage" field, so it doesn't perform the validation check on the message field. As a result, the form can be submitted even if the message field is empty.
+
+- **XSS Exploration**: Subsequently, the form was tested for Cross-Site Scripting (XSS) vulnerability by injecting a simple script into the message field, which successfully exploited the vulnerability. Additionally, it was discovered that entering "script" in either the Name or Message input fields also led to the retrieval of sensitive data.
 
 ## Prevention
 
-1. **Input Validation**: Implement strict input validation to ensure that user-supplied data conforms to expected formats and does not contain potentially harmful scripts.
-   
-2. **Output Encoding**: Encode user-generated content before displaying it in web pages to neutralize any embedded scripts and prevent them from being executed.
-   
-3. **Content Security Policy (CSP)**: Utilize CSP headers to specify which sources of content are allowed to be loaded on a web page, thereby reducing the risk of XSS attacks by limiting the execution of untrusted scripts.
+1. **Input Validation**: Implement strict input validation to ensure that user-supplied data conforms to expected formats and does not contain potentially harmful scripts:
 
-4. **HTTPOnly Cookies**: Set the HTTPOnly flag on cookies to prevent client-side scripts from accessing them, thereby mitigating the risk of session hijacking via XSS attacks.
+  - **Data Type Validation**: Check if the input matches the expected data type. For example, if a field is supposed to receive an email, the input should be validated against an email format.
 
-5. **Regular Security Audits and Updates**: Conduct periodic security audits of web applications to identify and patch potential XSS vulnerabilities. Stay updated with security best practices and incorporate relevant security patches and updates into the application's codebase.
+  - **Length Validation**: Check if the input length is within the expected range. This can prevent buffer overflow attacks.
+
+  - **Format Validation**: Check if the input matches a specific format. For example, a date field might require the input to be in the format "MM/DD/YYYY".
+
+  - **Range Validation**: Check if a numerical input falls within a certain range.
+
+  - **Regular Expression Validation**: Use regular expressions to enforce complex input patterns.
+
+  - **Blacklist Validation**: Check the input against a list of known bad inputs.
+
+  - **Whitelist Validation**: Only allow inputs that match a list of known good inputs.
+
+  - **Encoding**: Encode user input to ensure that potentially harmful characters are not interpreted in a harmful way.
+
+  - **Sanitization**: Remove or replace any potentially harmful characters from the input.
+
+  Remember, client-side validation can be bypassed, so it's important to also perform **server-side validation**.
+      
+2. **Content Security Policy (CSP)**: Utilize CSP headers to specify which sources of content are allowed to be loaded on a web page, thereby reducing the risk of XSS attacks by limiting the execution of untrusted scripts.
+
+3. **HTTPOnly Cookies**: Set the HTTPOnly flag on cookies to prevent client-side scripts from accessing them, thereby mitigating the risk of session hijacking via XSS attacks.
+
+4. **Regular Security Audits and Updates**: Conduct periodic security audits of web applications to identify and patch potential XSS vulnerabilities. Stay updated with security best practices and incorporate relevant security patches and updates into the application's codebase.
 
 ## Additional Resources
 
