@@ -15,15 +15,17 @@ Path traversal vulnerabilities are typically discovered through manual testing o
 
 ### How I Have Discovered It
 
-In our investigation, we utilized path traversal techniques on the webpage accessible via the affected URL. By manipulating the `page` parameter in the URL, we were able to traverse the directory structure and access sensitive files, including the `/etc/passwd` file, which contains user account information.
+During our investigation, we employed path traversal methods on a webpage accessible through a specific URL. By altering the `page` parameter in the URL, we managed to navigate through the directory structure and access confidential files, including the `/etc/passwd` file. This file, common in Unix and Linux systems, holds basic user attributes such as user ID, group ID, home directory, and shell, and is used by various system utilities to map user IDs to usernames.
 
-The vulnerability was discovered using a Python script named `path_traversal.py`. This script automates the process of exploiting the path traversal vulnerability by manipulating the `page` parameter in the URL. It attempts to access the `/etc/passwd` file by incrementally adding directory traversal sequences (`../`) to the base URL:
+The `/etc/passwd` file, targeted by the script through a path traversal vulnerability, can hold sensitive data. Although it doesn't store passwords, it does list all user accounts on the system, along with some account information (like user ID, group ID, home directory, and shell). An attacker could potentially use this information to gain a deeper understanding of the system and facilitate further attacks.
+
+We discovered the vulnerability using a Python script named `path_traversal.py`. This script automates the process of exploiting the path traversal vulnerability by manipulating the `page` parameter in the URL. It tries to access the `/etc/passwd` file by progressively adding directory traversal sequences (`../`) to the base URL:
 
 ```bash
 python3 path_traversal.py http://127.0.0.1:8080
 ```
 
-The script output is as follows:
+The script's output is as follows:
 
 ```plaintext
 http://127.0.0.1:8080/?page=etc/passwd
@@ -37,7 +39,27 @@ http://127.0.0.1:8080/?page=../../../../../../../etc/passwd
 FOUND
 ```
 
-The script successfully accessed the `/etc/passwd` file in path **http://<ip_address>/?page=../../../../../../../etc/passwd**, revealing sensitive information about the server's user accounts:
+The script successfully accessed the `/etc/passwd` file at the path **http://<ip_address>/?page=../../../../../../../etc/passwd**, exposing sensitive information about the server's user accounts. Here are more common sensitive file paths in Unix/Linux-based systems that could be exploited with this script:
+
+1. `/etc/shadow`: Contains encrypted password and other information such as password expiration for each user.
+
+2. `/etc/group`: Contains group membership information.
+
+3. `/etc/sudoers`: Defines which users can run what software on which machines and as which users.
+
+4. `/etc/ssh/sshd_config`: Contains configurations for the SSH daemon, including what users are allowed to log in.
+
+5. `/etc/ssh/ssh_config`: Contains client-side configurations for SSH, including the system-wide configuration for every SSH client on the system.
+
+6. `/root/.ssh/id_rsa`: Contains the private key for the root user (if it exists).
+
+7. `/home/*/.ssh/id_rsa`: Contains private keys for any user that has one.
+
+8. `/var/log/auth.log` or `/var/log/secure`: Contains system log messages related to authentication and authorization.
+
+9. `/etc/mysql/my.cnf`: Contains MySQL configuration, including possibly passwords.
+
+10. `/proc/self/environ`: Contains environment variables.
 
 ## Prevention
 

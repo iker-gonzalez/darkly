@@ -5,7 +5,7 @@
 The security breach involved an `htpasswd` file that was improperly protected, allowing unauthorized access to admin credentials, ultimately leading to a compromise of the admin panel.
 
 ## Vulnerability Path
-**http://<ip_address>:<port>/whatever/htpasswd**
+**http://<ip_address>/whatever/htpasswd**
 
 ## Discovery
 

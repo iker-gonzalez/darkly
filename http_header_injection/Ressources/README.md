@@ -11,17 +11,31 @@ This document outlines a security breach involving header manipulation, where un
 
 Such vulnerabilities are typically discovered through code reviews, penetration testing, and the use of automated security scanning tools that identify weaknesses in handling HTTP headers.
 
+This vulnerability allows attackers to circumvent security protocols and gain access to restricted areas of a web application.
+
+## Path to the Vulnerability
+**http://<ip_address>/index.php?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f**
+
+## Discovery
+
+### Common Discovery Methods
+
+These types of vulnerabilities are usually identified through methods such as code reviews, penetration testing, and the use of automated security scanning tools. These tools are designed to detect weaknesses in the handling of HTTP headers.
+
 ### How I Discovered It
 
-The vulnerability was discovered in the source code of a webpage, where a comment hinted at specific requirements for the `User-Agent` and `Referer` headers to access further functionality. By modifying these headers to meet the specified conditions, it was possible to exploit this vulnerability and gain unauthorized access.
+I discovered the vulnerability in the source code of a webpage, which could be accessed by clicking on the copyright symbol in the footer. A comment in the code hinted at specific prerequisites for the `User-Agent` and `Referer` headers to unlock additional functionality. 
 
-By sending a crafted HTTP request using `curl`, the request was modified to include specific `User-Agent` and `Referer` headers that were hinted at in the application's source code. Here's the command I used:
+- The source of the request must be: "https://www.nsa.gov/" (Referer).
+- The browser used should be: "ft_bornToSec" (User-Agent). This will be of significant assistance.
+
+I exploited this vulnerability by crafting an HTTP request with these specific headers using `curl`. The command I utilized is as follows:
 
 ```bash
 curl -H "User-Agent: ft_bornToSec" -H "Referer: https://www.nsa.gov/" "http://127.0.0.1:8080/index.php?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f" | grep 'flag'
 ```
 
-This resulted in a response that included the flag `f2a29020ef3132e01dd61df97fd33ec8d7fcd1388cc9601e7db691d17d4d6188`, confirming the successful exploitation of the vulnerability.
+The response included the flag `f2a29020ef3132e01dd61df97fd33ec8d7fcd1388cc9601e7db691d17d4d6188`, which confirmed the successful exploitation of the vulnerability.
 
 ## Prevention
 
