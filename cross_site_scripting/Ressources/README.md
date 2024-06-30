@@ -6,7 +6,7 @@ Cross-Site Scripting (XSS) is a common web vulnerability where attackers inject 
 XSS attacks can have various consequences, including stealing session cookies, redirecting users to malicious websites, or modifying the content of the page.
 
 ## Vulnerability Path
-**http://<ip_address>/?page=feedback**
+**http://<ip_address>/index.php?page=feedback**
 
 ## Discovery
 
